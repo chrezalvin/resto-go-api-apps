@@ -2,12 +2,15 @@ import { supabase } from "@config";
 import ServiceSupabase from "libraries/ServiceSupabase";
 import { Branch } from "models";
 import { BranchService } from "services/BranchService";
+import foods from "assets/foodImg.json";
+import { FoodService } from "services/FoodService";
+import fs from "fs";
 
 (async () => {
-    console.log("Finding branches...");
+    // for(const food of foods){
+    //     const blob = fs.readFileSync(`src/assets/${food.img}`);
+    //     const url = await (new Blob([blob]).arrayBuffer());
 
-    const branches = await BranchService.getBranches();
-    console.log(branches);
-
-    console.log("Finding branch...");
+    //     await FoodService.addFood(food, blob.);
+    // }
 })();

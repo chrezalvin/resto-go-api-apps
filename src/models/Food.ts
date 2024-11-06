@@ -3,7 +3,7 @@ export interface Food{
     branch_id: number;
     food_name: string;
     food_desc: string;
-    img_url: string;
+    img_path?: string;
     price: number;
     available: boolean;
 }
@@ -24,7 +24,7 @@ export function isFood(value: unknown): value is Food{
     if(!("food_desc" in value) || typeof value.food_desc !== "string")
         return false;
 
-    if(!("img_url" in value) || typeof value.img_url !== "string")
+    if("img_path" in value && typeof value.img_path !== "string")
         return false;
 
     if(!("price" in value) || typeof value.price !== "number")

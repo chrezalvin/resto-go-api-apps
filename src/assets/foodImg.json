@@ -1,0 +1,65 @@
+[
+    {
+        "name": "Hamburger",
+        "description": "lettuce, tomato, onion, pickles, ketchup, mustard, mayo",
+        "img": "hamburger.jpg",
+        "price": 20000,
+        "category": "food"
+    },
+    {
+        "name": "Classic Cheese Pizza",
+        "description": "Pizza with tomato sauce and mozzarella",
+        "img": "classic-cheese-pizza.jpg",
+        "price": 100000,
+        "category": "food"
+    },
+    {
+        "name": "Meat Lover's Pizza",
+        "description": "Pizza with pepperoni, sausage, ham, bacon, and beef",
+        "img": "meatlovers-pizza.jpg",
+        "price": 120000,
+        "category": "food"
+    },
+    {
+        "name": "Pizza Margherita",
+        "description": "Pizza with tomato, mozzarella, and basil",
+        "img": "pizza-margherita.jpg",
+        "price": 90000,
+        "category": "food"
+    },
+    {
+        "name": "Veggie Supreme Pizza",
+        "description": "Pizza with tomato, mozzarella, onion, bell pepper, mushroom, and black olives",
+        "img": "veggie-supreme-pizza.jpg",
+        "price": 110000,
+        "category": "food"
+    },
+    {
+        "name": "Spaghetti",
+        "description": "Spaghetti with tomato sauce",
+        "img": "spaghetti.jpg",
+        "price": 30000,
+        "category": "food"
+    },
+    {
+        "name": "Spaghetti Bolognese",
+        "description": "Spaghetti with tomato sauce and ground beef",
+        "img": "spaghetti-bolognese.jpg",
+        "price": 35000,
+        "category": "food"
+    },
+    {
+        "name": "Salad",
+        "description": "Lettuce, tomato, cucumber, carrot, and dressing",
+        "img": "salad.jpg",
+        "price": 25000,
+        "category": "food"
+    },
+    {
+        "name": "Chicken Salad",
+        "description": "Salad with chicken, lettuce, tomato, cucumber, carrot, and dressing",
+        "img": "chicken-salad.jpg",
+        "price": 30000,
+        "category": "food"
+    }
+]
