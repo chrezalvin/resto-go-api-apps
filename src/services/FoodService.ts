@@ -3,8 +3,8 @@ import ServiceSupabase from "libraries/ServiceSupabase";
 import { Food, isFood } from "models";
 
 export class FoodService{
-    protected static readonly foodPath: string = "food";
-    protected static readonly foodImgPath: string = "food_img";
+    protected static readonly foodPath: string = "Food";
+    protected static readonly foodImgPath: string = "foodImg";
 
     static foodManager = new ServiceSupabase<Food, "food_id">("food_id", FoodService.foodPath, {
         typeGuard: isFood,
@@ -42,7 +42,7 @@ export class FoodService{
     }
 
     static async addFood(food: Omit<Food, "food_id" | "img_path">, imgBlob?: Blob): Promise<Food>{
-        const res = await FoodService.foodManager.add({...food, img_path: undefined});
+        const res = await FoodService.foodManager.add({...food, img_path: null});
 
         if(!res)
             throw new Error("Failed to add food");

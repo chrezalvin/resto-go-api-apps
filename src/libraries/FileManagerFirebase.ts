@@ -11,7 +11,7 @@ export class FileManagerFirebase{
     // map all FileManagers
     public static s_filemanagers: FileManagerFirebase[] = [];
 
-    protected static readonly acceptedBlobTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    protected static readonly acceptedBlobTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp", "image/gif"];
     protected static storage = getStorage(firebaseApp);
 
     protected m_imgPath: string;

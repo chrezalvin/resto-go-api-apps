@@ -3,7 +3,7 @@ export interface Food{
     branch_id: number;
     food_name: string;
     food_desc: string;
-    img_path?: string;
+    img_path: string | null;
     price: number;
     available: boolean;
 }
@@ -24,7 +24,7 @@ export function isFood(value: unknown): value is Food{
     if(!("food_desc" in value) || typeof value.food_desc !== "string")
         return false;
 
-    if("img_path" in value && typeof value.img_path !== "string")
+    if(!("img_path" in value) || (value.img_path !== null && typeof value.img_path !== "string"))
         return false;
 
     if(!("price" in value) || typeof value.price !== "number")
@@ -49,7 +49,7 @@ export function isFoodWithoutId(value: unknown): value is Omit<Food, "food_id">{
     if(!("food_desc" in value) || typeof value.food_desc !== "string")
         return false;
 
-    if("img_path" in value && typeof value.img_path !== "string")
+    if(!("img_path" in value) || (value.img_path !== null && typeof value.img_path !== "string"))
         return false;
 
     if(!("price" in value) || typeof value.price !== "number")
@@ -77,7 +77,7 @@ export function isPartialFood(value: unknown): value is Partial<Food>{
     if("food_desc" in value && typeof value.food_desc !== "string")
         return false;
 
-    if("img_path" in value && typeof value.img_path !== "string")
+    if("img_path" in value && (value.img_path !== null && typeof value.img_path !== "string"))
         return false;
 
     if("price" in value && typeof value.price !== "number")
