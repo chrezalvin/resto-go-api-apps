@@ -1,27 +1,15 @@
 import { Request, Response } from "express";
 import { BranchService } from "services/BranchService";
-import { SeatService } from "services/SeatService";
 
-export async function branch_post(req: Request, res: Response){
-    const tableId = parseInt(req.params.table_id);
-    const {long, lat} = req.body;
+export async function branch_get_all(_: Request, res: Response){
+    const branches = await BranchService.getBranches();
 
-    if(isNaN(tableId)){
-        throw new Error("Invalid data");
-    }
+    res.json(branches);
+}
 
-    if(typeof long !== "number" || typeof lat !== "number"){
-        throw new Error("Invalid data");
-    }
+export async function branch_get_by_id(req: Request, res: Response){
+    const branch_id = parseInt(req.params.branch_id);
+    const branch = await BranchService.getBranch(branch_id);
 
-    const branch = await BranchService.getNearestBranch(long, lat);
-    const seat = await SeatService.getSeat(tableId, branch.branch_id);
-
-    if(seat.available){
-        await SeatService.setSeatAvailability(tableId, false);
-
-        return res.status(200).send(branch);
-    }
-    else
-        throw new Error("Seat is not available");
+    res.json(branch);
 }

@@ -1,14 +1,12 @@
-import { branch_post } from "controller/branch";
+import { food_get } from "controller/food";
 import { RouterInterface } from "libraries/CustomTypes";
 
 const routes: RouterInterface[] = [
     {
         path: "/food",
         method: "get",
-        accessType: "public",
-        handler: (req, res) => {
-            res.send("hello world");
-        }
+        accessType: "customer",
+        handler: food_get
     }
 ];
 

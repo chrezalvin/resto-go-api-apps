@@ -1,12 +1,12 @@
 import { isWithinRadius } from "libraries/func";
-import ServiceSupabase from "libraries/ServiceSupabase";
+import ServiceSupabase from "../libraries/ServiceSupabase";
 import { Branch, isBranch } from "models";
 
 export class BranchService{
     protected static readonly branchPath: string = "branch";
 
     static branchManager = new ServiceSupabase<Branch, "branch_id">("branch_id", BranchService.branchPath, {
-        // typeGuard: isBranch,
+        typeGuard: isBranch,
         useCache: false,
     });
 
@@ -28,5 +28,17 @@ export class BranchService{
         }
 
         throw new Error("No branch found within 120 meters");
+    }
+
+    static async addBranch(branch: Omit<Branch, "branch_id">){
+        return await BranchService.branchManager.add(branch);
+    }
+
+    static async updateBranch(branch_id: number, branch: Partial<Branch>){
+        return await BranchService.branchManager.update(branch_id, branch);
+    }
+
+    static async deleteBranch(branch_id: number){
+        return await BranchService.branchManager.delete(branch_id);
     }
 }

@@ -7,10 +7,10 @@ import { FoodService } from "services/FoodService";
 import fs from "fs";
 
 (async () => {
-    // for(const food of foods){
-    //     const blob = fs.readFileSync(`src/assets/${food.img}`);
-    //     const url = await (new Blob([blob]).arrayBuffer());
+    for(const food of foods){
+        const blob = fs.readFileSync(`src/assets/${food.img}`);
+        const url = await (new Blob([blob]).arrayBuffer());
 
-    //     await FoodService.addFood(food, blob.);
-    // }
+        await FoodService.addFood(food, blob.);
+    }
 })();

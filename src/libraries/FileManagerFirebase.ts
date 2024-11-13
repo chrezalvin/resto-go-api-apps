@@ -57,10 +57,18 @@ export class FileManagerFirebase{
      * @param filename the file name of the image that will be stored in the database (without extension) if not set, it will generate an uuid
      * @returns UploadResult
      */
-    protected async _uploadImage(imgUrl: string, filename?: string): Promise<UploadResult>{
+    protected async _uploadImage(urlOrBlob: string | Blob, filename?: string): Promise<UploadResult>{
         // fetcha and test if the data is a valid image
-        const res = await fetch(imgUrl);
-        const blob = await res.blob();
+
+        let blob: Blob;
+
+        if(typeof urlOrBlob === "string"){
+            const res = await fetch(urlOrBlob);
+            blob = await res.blob();
+        }
+        else{
+            blob = urlOrBlob;
+        }
         
         const fileExtension = blob.type.split("/")[1];
 
@@ -114,10 +122,10 @@ export class FileManagerFirebase{
         return allFiles;
     }
 
-    public async uploadImage(imgUrl: string, filename?: string): Promise<UploadResult | null>{
+    public async uploadImage(imgUrlOrBlob: string | Blob, filename?: string): Promise<UploadResult | null>{
         debug(`Uploading ${filename ?? "unknown filename"}`);
         
-        const res = await this._uploadImage(imgUrl, filename);
+        const res = await this._uploadImage(imgUrlOrBlob, filename);
         return res;
     }
 
