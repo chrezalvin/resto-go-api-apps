@@ -3,6 +3,8 @@ import { NextFunction, RequestHandler, Router, Request, Response } from "express
 
 import branch from "./branch";
 import food from "./food";
+import authenticate from "./authenticate";
+import { checkAccessType } from "middleware/checkAccessType";
 
 export function asyncErrorHandler(
     fn: RequestHandler
@@ -33,13 +35,15 @@ const router: Router = Router();
 const routes: RouterInterface[][] = [
     branch,
     food,
+    authenticate,
 ];
 
 for(const route of routes)
     for(const routeElement of route)
         router[routeElement.method](
             routeElement.path,
-            asyncErrorHandler(routeElement.handler)
+            checkAccessType(routeElement.accessType),
+            asyncErrorHandler(routeElement.handler),
         );
 
 export default router;

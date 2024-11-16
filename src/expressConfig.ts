@@ -4,6 +4,7 @@ import logger from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import routes from "./routes";
+import { sessionCheck } from "middleware/customerCheck";
 
 const express = Express();
 
@@ -12,6 +13,7 @@ express.use(logger("dev"));
 express.use(Express.json());
 express.use(Express.urlencoded());
 express.use(cookieParser());
+express.use(sessionCheck());
 
 express.use(routes);
 

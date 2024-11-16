@@ -7,7 +7,7 @@ export interface RouterInterface{
     // handler: (req: Request, res: Response, next: NextFunction) => Promise<void>;
     // handler: ((req: Request, res: Response, next: NextFunction) => Promise<void>) | ((req: Request, res: Response) => Promise<void>);
     method: "get" | "post" | "put" | "delete" | "patch" | "options" | "head" | "connect" | "trace";
-    accessType?: "public" | "private" | "owner" | "vice";
+    accessType?: "public" | "admin" | "customer";
 }
 
 export interface I_Cause{

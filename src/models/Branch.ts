@@ -21,3 +21,32 @@ export function isBranch(value: unknown): value is Branch{
     
     return true;
 }
+
+export function isBranchWithoutId(value: unknown): value is Omit<Branch, "branch_id">{
+    if(typeof value !== "object" || value === null)
+        return false;
+
+    if(!("branch_name" in value) || typeof value.branch_name !== "string")
+        return false;
+
+    if(!("address" in value) || typeof value.address !== "string")
+        return false;
+    
+    return true;
+}
+
+export function isPartialBranch(value: unknown): value is Partial<Branch>{
+    if(typeof value !== "object" || value === null)
+        return false;
+
+    if("branch_id" in value && typeof value.branch_id !== "number")
+        return false;
+
+    if("branch_name" in value && typeof value.branch_name !== "string")
+        return false;
+
+    if("address" in value && typeof value.address !== "string")
+        return false;
+    
+    return true;
+}

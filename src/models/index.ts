@@ -1,19 +1,6 @@
-export {
-    Food,
-    isFood
-} from "./Food";
-
-export {
-    Branch,
-    isBranch
-} from "./Branch";
-
-export {
-    Seat,
-    isSeat
-} from "./Seat";
-
-export {
-    Order,
-    isOrder
-} from "./Order";
+export * from "./Food";
+export * from "./Branch";
+export * from "./Seat";
+export * from "./Order";
+export * from "./Transaction";
+export * from "./Customer";
