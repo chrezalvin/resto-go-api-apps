@@ -1,0 +1,246 @@
+[
+    {
+      "title": "Cheese Burger",
+      "description": "A hamburger with a slice of melted cheese on top of the meat patty.",
+      "price": "Rp. 50.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Food",
+      "quantity": 120,
+      "rating": 4.5
+    },
+    {
+      "title": "Regular Pizza",
+      "description": "Traditional style of pizza with toppings, such as pepperoni and sausage.",
+      "price": "Rp. 100.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Food",
+      "quantity": 80,
+      "rating": 4.7
+    },
+    {
+      "title": "Spaghetti Bolognese",
+      "description": "Pasta served with a rich, savory meat sauce.",
+      "price": "Rp. 60.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Food",
+      "quantity": 200,
+      "rating": 4.6
+    },
+    {
+      "title": "Fried Chicken",
+      "description": "Crispy fried chicken with a crunchy coating.",
+      "price": "Rp. 40.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Food",
+      "quantity": 150,
+      "rating": 4.3
+    },
+    {
+      "title": "Grilled Steak",
+      "description": "Tender steak grilled to perfection and served with sides.",
+      "price": "Rp. 150.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Food",
+      "quantity": 90,
+      "rating": 4.8
+    },
+    {
+      "title": "Tacos",
+      "description": "Soft tortillas filled with seasoned meat, cheese, and fresh veggies.",
+      "price": "Rp. 45.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Food",
+      "quantity": 110,
+      "rating": 4.4
+    },
+    {
+      "title": "Chicken Nuggets",
+      "description": "Breaded chicken nuggets served with dipping sauce.",
+      "price": "Rp. 30.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Food",
+      "quantity": 175,
+      "rating": 4.2
+    },
+    {
+      "title": "Caesar Salad",
+      "description": "Crisp romaine lettuce tossed with Caesar dressing and parmesan.",
+      "price": "Rp. 35.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Food",
+      "quantity": 130,
+      "rating": 4.1
+    },
+    {
+      "title": "Fish and Chips",
+      "description": "Crispy battered fish served with golden fries.",
+      "price": "Rp. 70.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Food",
+      "quantity": 50,
+      "rating": 4.0
+    },
+    {
+      "title": "Hot Dog",
+      "description": "Classic hot dog in a soft bun, served with ketchup and mustard.",
+      "price": "Rp. 20.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Food",
+      "quantity": 210,
+      "rating": 4.3
+    },
+    {
+      "title": "Lemonade",
+      "description": "Freshly squeezed lemonade with a hint of mint.",
+      "price": "Rp. 25.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Drink",
+      "quantity": 200,
+      "rating": 4.3
+    },
+    {
+      "title": "Iced Tea",
+      "description": "Refreshing iced tea with lemon slices.",
+      "price": "Rp. 20.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Drink",
+      "quantity": 180,
+      "rating": 4.1
+    },
+    {
+      "title": "Smoothie",
+      "description": "Fruit smoothie made with fresh berries and yogurt.",
+      "price": "Rp. 35.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Drink",
+      "quantity": 150,
+      "rating": 4.7
+    },
+    {
+      "title": "Cold Brew Coffee",
+      "description": "Smooth and chilled coffee brewed for hours.",
+      "price": "Rp. 40.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Drink",
+      "quantity": 130,
+      "rating": 4.6
+    },
+    {
+      "title": "Milkshake",
+      "description": "Thick milkshake with vanilla, chocolate, or strawberry flavor.",
+      "price": "Rp. 30.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Drink",
+      "quantity": 170,
+      "rating": 4.4
+    },
+    {
+      "title": "Fruit Punch",
+      "description": "Sweet and tangy fruit punch made with orange and pineapple.",
+      "price": "Rp. 25.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Drink",
+      "quantity": 140,
+      "rating": 4.2
+    },
+    {
+      "title": "Coconut Water",
+      "description": "Fresh coconut water served chilled.",
+      "price": "Rp. 20.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Drink",
+      "quantity": 110,
+      "rating": 4.0
+    },
+    {
+      "title": "Pineapple Juice",
+      "description": "Freshly squeezed pineapple juice.",
+      "price": "Rp. 22.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Drink",
+      "quantity": 160,
+      "rating": 4.5
+    },
+    {
+      "title": "French Fries",
+      "description": "Crispy golden fries served with a side of ketchup.",
+      "price": "Rp. 30.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Side",
+      "quantity": 150,
+      "rating": 4.2
+    },
+    {
+      "title": "Onion Rings",
+      "description": "Crispy fried onion rings served with dipping sauce.",
+      "price": "Rp. 25.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Side",
+      "quantity": 140,
+      "rating": 4.0
+    },
+    {
+      "title": "Garlic Bread",
+      "description": "Warm garlic bread with a crispy crust.",
+      "price": "Rp. 20.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Side",
+      "quantity": 130,
+      "rating": 4.3
+    },
+    {
+      "title": "Potato Wedges",
+      "description": "Crispy wedges made from seasoned potatoes.",
+      "price": "Rp. 28.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Side",
+      "quantity": 100,
+      "rating": 4.5
+    },
+    {
+      "title": "Coleslaw",
+      "description": "Freshly prepared coleslaw with a tangy dressing.",
+      "price": "Rp. 18.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Side",
+      "quantity": 160,
+      "rating": 4.2
+    },
+    {
+      "title": "Mozzarella Sticks",
+      "description": "Fried mozzarella cheese sticks served with marinara sauce.",
+      "price": "Rp. 35.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Side",
+      "quantity": 80,
+      "rating": 4.7
+    },
+    {
+      "title": "Chicken Wings",
+      "description": "Spicy or mild chicken wings served with dipping sauce.",
+      "price": "Rp. 50.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Side",
+      "quantity": 90,
+      "rating": 4.6
+    },
+    {
+      "title": "Spring Rolls",
+      "description": "Crispy spring rolls filled with vegetables and meat.",
+      "price": "Rp. 40.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Side",
+      "quantity": 70,
+      "rating": 4.3
+    },
+    {
+      "title": "Baked Beans",
+      "description": "Delicious baked beans cooked in a rich sauce.",
+      "price": "Rp. 22.000",
+      "imageUrl": "https://via.placeholder.com/100",
+      "category": "Side",
+      "quantity": 140,
+      "rating": 4.0
+    }
+  ]
+  
