@@ -4,9 +4,9 @@
   "description": "restaurant-go backend",
   "main": "index.js",
   "scripts": {
-    "test": "SET DEBUG=Server:*,ChrezBot:*&&nodemon -r tsconfig-paths/register ./src/test.ts",
+    "test": "SET DEBUG=Server:*&&nodemon -r tsconfig-paths/register ./src/test.ts",
     "start": "tsc && tsc-alias &&node ./output/index",
-    "devstart": "SET DEBUG=Server:*,ChrezBot:*&&nodemon -r tsconfig-paths/register ./src/index.ts"
+    "devstart": "SET DEBUG=Server:*&&nodemon -r tsconfig-paths/register ./src/index.ts"
   },
   "author": "chrezalvin",
   "license": "ISC",
