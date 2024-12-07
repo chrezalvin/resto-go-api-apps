@@ -15,9 +15,8 @@ export class FoodService{
 
     static async translateImageUrl(food: Food): Promise<Food>{
 
-        if(!food.img_path)
-            food.img_path = await FoodService.fileManager.getUrlFromPath(food.img_path!);
-
+        if(food.img_path)
+            food.img_path = await FoodService.fileManager.getUrlFromPath(food.img_path);
         return food;
     }
 
