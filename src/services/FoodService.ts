@@ -26,6 +26,20 @@ export class FoodService{
         return await Promise.all(res.map(FoodService.translateImageUrl));
     }
 
+    static async getFoodByIds(food_ids: Food["food_id"][]): Promise<Food[]>{
+        const res = await FoodService
+            .foodManager
+            .queryBuilder(query => query
+                .select("*")
+                .in("food_id", food_ids)
+            );
+
+        if(!Array.isArray(res))
+            throw new Error("Failed to get food");
+
+        return await Promise.all(res.map(FoodService.translateImageUrl));
+    }
+
     static async getFoodByBranch(branch_id: number): Promise<Food[]>{
         const res = await FoodService
             .foodManager

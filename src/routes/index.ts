@@ -5,7 +5,6 @@ import branch from "./branch";
 import food from "./food";
 import authenticate from "./authenticate";
 import payment from "./payment";
-import transaction from "./transaction";
 import { checkAccessType } from "middleware/checkAccessType";
 
 export function asyncErrorHandler(

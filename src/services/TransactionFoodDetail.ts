@@ -2,7 +2,7 @@ import ServiceSupabase from "libraries/ServiceSupabase";
 import { isTransactionFoodDetail, TransactionFoodDetail } from "models/TransactionFoodDetail";
 
 export class TransactionFoodDetailService {
-    protected static readonly transactionDetailPath: string = "Transaction";
+    protected static readonly transactionDetailPath: string = "TransactionFoodDetail";
 
     static transactionManager = new ServiceSupabase<TransactionFoodDetail, "transaction_food_detail_id">("transaction_food_detail_id", TransactionFoodDetailService.transactionDetailPath, {
         typeGuard: isTransactionFoodDetail,
@@ -13,7 +13,7 @@ export class TransactionFoodDetailService {
         return await TransactionFoodDetailService.transactionManager.get(transactionFoodDetailId);
     }
 
-    static async createMultipleTransactionFoodDetails(foodDetails: Omit<TransactionFoodDetail, "transaction_id">[]){
+    static async createMultipleTransactionFoodDetails(foodDetails: Omit<TransactionFoodDetail, "transaction_food_detail_id">[]){
         return await TransactionFoodDetailService
             .transactionManager
             .queryBuilder(
