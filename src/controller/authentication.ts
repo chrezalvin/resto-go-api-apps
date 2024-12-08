@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
+import { BranchService } from "services/BranchService";
 import { CustomerService } from "services/CustomerService";
+import { SeatService } from "services/SeatService";
 
 export async function authenticate_post(req: Request, res: Response){
     const seat_id = parseInt(req.body.seat_id);
