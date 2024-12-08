@@ -1,3 +1,5 @@
+type FoodCategory = "food" | "drink" | "other";
+
 export interface Food{
     food_id: number;
     branch_id: number;
@@ -6,6 +8,7 @@ export interface Food{
     img_path: string | null;
     price: number;
     available: boolean;
+    category: FoodCategory;
 }
 
 export function isFood(value: unknown): value is Food{
@@ -32,6 +35,9 @@ export function isFood(value: unknown): value is Food{
 
     if(!("available" in value) || typeof value.available !== "boolean")
         return false;
+
+    if(!("category" in value) || typeof value.category !== "string")
+        return false;
     
     return true;
 }
@@ -56,6 +62,9 @@ export function isFoodWithoutId(value: unknown): value is Omit<Food, "food_id">{
         return false;
 
     if(!("available" in value) || typeof value.available !== "boolean")
+        return false;
+
+    if(!("category" in value) || typeof value.category !== "string")
         return false;
     
     return true;
@@ -84,6 +93,9 @@ export function isPartialFood(value: unknown): value is Partial<Food>{
         return false;
 
     if("available" in value && typeof value.available !== "boolean")
+        return false;
+
+    if("category" in value && typeof value.category !== "string")
         return false;
     
     return true;
