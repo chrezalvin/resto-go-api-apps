@@ -50,6 +50,7 @@ export async function profile_get(req: Request, res: Response){
     res.json({
         customer_id: profile.customer_id,
         branch: branch,
+        seat: seat,
         transaction: transaction,
     });
 }
