@@ -15,14 +15,27 @@ export class FoodService{
 
     static async translateImageUrl(food: Food): Promise<Food>{
 
-        if(!food.img_path)
-            await FoodService.fileManager.getUrlFromPath(food.img_path!);
-
+        if(food.img_path)
+            food.img_path = await FoodService.fileManager.getUrlFromPath(food.img_path);
         return food;
     }
 
     static async getFoods(){
         const res = await FoodService.foodManager.getAll();
+
+        return await Promise.all(res.map(FoodService.translateImageUrl));
+    }
+
+    static async getFoodByIds(food_ids: Food["food_id"][]): Promise<Food[]>{
+        const res = await FoodService
+            .foodManager
+            .queryBuilder(query => query
+                .select("*")
+                .in("food_id", food_ids)
+            );
+
+        if(!Array.isArray(res))
+            throw new Error("Failed to get food");
 
         return await Promise.all(res.map(FoodService.translateImageUrl));
     }

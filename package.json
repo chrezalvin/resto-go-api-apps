@@ -4,14 +4,15 @@
   "description": "restaurant-go backend",
   "main": "index.js",
   "scripts": {
-    "test": "SET DEBUG=Server:*,ChrezBot:*&&nodemon -r tsconfig-paths/register ./src/test.ts",
+    "test": "SET DEBUG=Server:*&&nodemon -r tsconfig-paths/register ./src/test.ts",
     "start": "tsc && tsc-alias &&node ./output/index",
-    "devstart": "SET DEBUG=Server:*,ChrezBot:*&&nodemon -r tsconfig-paths/register ./src/index.ts"
+    "devstart": "SET DEBUG=Server:*&&nodemon -r tsconfig-paths/register ./src/index.ts"
   },
   "author": "chrezalvin",
   "license": "ISC",
   "dependencies": {
     "@supabase/supabase-js": "^2.45.6",
+    "axios": "^1.7.9",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "debug": "^4.3.7",

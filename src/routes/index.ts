@@ -4,6 +4,7 @@ import { NextFunction, RequestHandler, Router, Request, Response } from "express
 import branch from "./branch";
 import food from "./food";
 import authenticate from "./authenticate";
+import payment from "./payment";
 import { checkAccessType } from "middleware/checkAccessType";
 
 export function asyncErrorHandler(
@@ -36,6 +37,7 @@ const routes: RouterInterface[][] = [
     branch,
     food,
     authenticate,
+    payment,
 ];
 
 for(const route of routes)

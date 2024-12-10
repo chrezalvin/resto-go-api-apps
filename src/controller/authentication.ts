@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
+import { Transaction } from "models";
+import { BranchService } from "services/BranchService";
 import { CustomerService } from "services/CustomerService";
+import { TransactionService } from "services/OrderService";
+import { SeatService } from "services/SeatService";
 
 export async function authenticate_post(req: Request, res: Response){
     const seat_id = parseInt(req.body.seat_id);
@@ -22,7 +26,7 @@ export async function logout_get(req: Request, res: Response){
 
     await CustomerService.deleteCustomer(customer.customer_id);
 
-    res.json({
+    res.status(200).json({
         message: "success"
     });
 }
@@ -33,5 +37,20 @@ export async function profile_get(req: Request, res: Response){
     if(!profile)
         throw new Error("Invalid profile!");
 
-    res.json(profile);
+    const seat = await SeatService.getSeatById(profile.seat_id);
+    const branch = await BranchService.getBranch(seat.branch_id);
+
+    if(!branch)
+        throw new Error("Invalid branch!");
+
+    let transaction: Transaction | null = null;
+    if(profile.transaction_id)
+        transaction = (await TransactionService.getTransactionById(profile.transaction_id)) ?? null;
+
+    res.json({
+        customer_id: profile.customer_id,
+        branch: branch,
+        seat: seat,
+        transaction: transaction,
+    });
 }

@@ -5,6 +5,7 @@
  */
 
 import app from "./expressConfig";
+import "webSocketConfig";
 import { port } from "@config";
 
 // var app = require('../app');
