@@ -17,10 +17,6 @@ export function sessionCheck(): RequestHandler{
             if(typeof sessionid === "string")
                 req.customer = await CustomerService.getCustomerById(sessionid);
 
-            if(sessionid){
-                
-            }
-
             next();
         }
         catch(err){

@@ -8,8 +8,11 @@ import { NextFunction, Request, Response } from "express";
 export function checkAccessType(accessType: RouterInterface["accessType"] = "admin"){
     return (req: Request, res: Response, next: NextFunction) => {
         const customer = req.customer;
+        const admin = req.admin;
 
-        if(customer)
+        if(admin && accessType === "admin")
+            next();
+        else if(customer && accessType === "customer")
             next();
         else{
             if(accessType === "public")

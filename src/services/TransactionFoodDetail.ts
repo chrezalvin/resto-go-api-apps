@@ -24,11 +24,16 @@ export class TransactionFoodDetailService {
     }
 
     static async getTransactionFoodDetailByTransactionId(transaction_id: TransactionFoodDetail["transaction_id"]) {
-        return await TransactionFoodDetailService
+        const res = await TransactionFoodDetailService
             .transactionManager
             .queryBuilder(query => query
                 .select("*")
                 .eq("transaction_id", transaction_id)
             );
+
+        if (!Array.isArray(res))
+            throw new Error("Failed to get transaction food detail");
+
+        return res;
     }
 }

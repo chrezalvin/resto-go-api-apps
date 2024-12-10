@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { Transaction } from "models";
+import { CustomerViewService } from "services/CustomerViewService";
 import { FoodService } from "services/FoodService";
 import { TransactionService } from "services/OrderService";
 import { SeatService } from "services/SeatService";
@@ -22,14 +24,7 @@ export async function food_branch_get(req: Request, res: Response){
     if(isNaN(branch_id))
         throw new Error("Invalid input data!");
 
-    const transactions = await TransactionService.getTransactionByBranch(branch_id);
+    const foods = await FoodService.getFoodByBranch(branch_id);
 
-    const transactionFoodDetail = await Promise.all(transactions.map(async (transaction) => {
-        return {
-            transaction: transaction,
-            transactionFoodDetails: await TransactionFoodDetailService.getTransactionFoodDetailByTransactionId(transaction.transaction_id)
-        }
-    }));
-
-    res.json(transactionFoodDetail);
+    res.json(foods);
 }
