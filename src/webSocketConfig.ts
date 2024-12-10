@@ -74,6 +74,8 @@ wss.on('connection', (ws) => {
     // Handle client disconnection
     ws.on('close', () => {
         console.log('Client disconnected');
+
+        subscriptions.delete(ws);
     });
 });
 
