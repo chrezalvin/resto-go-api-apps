@@ -2,7 +2,8 @@ import { NextFunction, RequestHandler, Request, Response } from "express";
 
 export interface RouterInterface{
     path: string;
-    handler: RequestHandler;
+    handler: RequestHandler | RequestHandler[];
+
     // handler: ((req: Request, res: Response, next: NextFunction) => Promise<void> | ((req: Request, res: Response) => Promise<void>));
     // handler: (req: Request, res: Response, next: NextFunction) => Promise<void>;
     // handler: ((req: Request, res: Response, next: NextFunction) => Promise<void>) | ((req: Request, res: Response) => Promise<void>);
