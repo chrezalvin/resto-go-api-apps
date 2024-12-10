@@ -21,15 +21,27 @@ const createTransaction = async (req, res) => {
 };
 exports.createTransaction = createTransaction;
 const handleWebhook = async (req, res) => {
+    const notificationData = req.body;
     try {
-        const result = await (0, Midtrans_1.handleWebhook)(req.body); // Panggil service webhook untuk menangani status pembayaran
-        res.status(200).json(result);
+        const status = notificationData.transaction_status;
+        const orderId = notificationData.order_id;
+        console.log(`Transaction status for order ${orderId}: ${status}`);
+        if (status === 'capture' || status === 'settlement') {
+            res.redirect(`myapp://payment-success/${orderId}`);
+        }
+        else if (status === 'pending') {
+            res.redirect('https://yourdomain.com/payment/pending');
+        }
+        else if (status === 'failed') {
+            res.redirect('https://yourdomain.com/payment/failed');
+        }
+        else {
+            res.status(400).json({ message: 'Unknown transaction status' });
+        }
     }
     catch (error) {
-        res.status(400).json({
-            success: false,
-            message: error.message || "Failed to process webhook",
-        });
+        console.error("Error handling webhook:", error);
+        res.status(500).json({ message: "Error processing payment status" });
     }
 };
 exports.handleWebhook = handleWebhook;

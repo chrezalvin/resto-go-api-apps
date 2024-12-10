@@ -1,31 +1,22 @@
 "use strict";
-// controllers/midtransController.ts
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleMidtransWebhook = void 0;
 const handleMidtransWebhook = (req, res) => {
-    const notification = req.body; // Webhook body from Midtrans
+    const notification = req.body;
     const { order_id, transaction_status, payment_type } = notification;
-    // Logika untuk menangani status transaksi
     switch (transaction_status) {
         case 'settlement':
-            // Pembayaran berhasil
             console.log(`Order ${order_id} is successful (settlement).`);
-            // Update status transaksi di database
             break;
         case 'cancel':
-            // Pembayaran dibatalkan
             console.log(`Order ${order_id} was cancelled.`);
-            // Update status transaksi di database
             break;
         case 'pending':
-            // Pembayaran dalam status pending
             console.log(`Order ${order_id} is pending.`);
-            // Update status transaksi di database
             break;
         default:
             console.log(`Unhandled transaction status: ${transaction_status}`);
     }
-    // Mengirimkan response ke Midtrans
     res.status(200).send('OK');
 };
 exports.handleMidtransWebhook = handleMidtransWebhook;

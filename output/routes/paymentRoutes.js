@@ -7,7 +7,13 @@ const paymentRoutes = [
         method: "post",
         path: "/api/payments/create",
         accessType: "public",
-        handler: [payment_1.validatePaymentInput, paymentController_1.createTransaction], // Validasi input dan buat transaksi.
+        handler: [payment_1.validatePaymentInput, paymentController_1.createTransaction],
+    },
+    {
+        method: "post",
+        path: "/api/payments/webhook",
+        accessType: "public",
+        handler: [paymentController_1.handleWebhook],
     },
 ];
 exports.default = paymentRoutes;
