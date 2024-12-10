@@ -189,20 +189,6 @@ export const payment_customer_get = async (req: Request, res: Response) => {
   res.status(200).json(transaction);
 }
 
-export const transaction_finalize_get = async (req: Request, res: Response) => {
-  const transaction_id = parseInt(req.params.transaction_id);
-
-  if(isNaN(transaction_id))
-    return res.status(400).json({ error: 'Invalid input data' });
-
-  const transaction = await TransactionService.updateTransaction(transaction_id, { finished: true });
-
-  if(!transaction)
-    return res.status(400).json({ error: 'Transaction not found' });
-
-  res.status(200).json(transaction);
-}
-
 export const payment_checkout_post = async (req: Request, res: Response) => {
   const foodList = req.body;
   const customer = req.customer;

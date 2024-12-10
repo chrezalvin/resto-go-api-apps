@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import routes from "./routes";
 import { sessionCheck } from "middleware/customerCheck";
+import { staffCheck } from "middleware/staffCheck";
 
 const express = Express();
 
@@ -14,6 +15,7 @@ express.use(Express.json());
 express.use(Express.urlencoded());
 express.use(cookieParser());
 express.use(sessionCheck());
+express.use(staffCheck());
 
 express.use(routes);
 

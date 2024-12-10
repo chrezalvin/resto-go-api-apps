@@ -1,4 +1,4 @@
-import { payment_cash_confirm_post, payment_checkout_post, payment_create_post, payment_customer_get, transaction_finalize_get } from 'controller/payment';
+import { payment_cash_confirm_post, payment_checkout_post, payment_create_post, payment_customer_get } from 'controller/payment';
 import { RouterInterface } from "libraries/CustomTypes";
 
 const routes: RouterInterface[] = [
@@ -11,7 +11,7 @@ const routes: RouterInterface[] = [
     {
         method: "post",
         path: "/payment/cash/confirm",
-        accessType: "public",
+        accessType: "admin",
         handler: payment_cash_confirm_post,
     },
     {
@@ -23,7 +23,7 @@ const routes: RouterInterface[] = [
     {
         method: "get",
         path: "/transaction/:transaction_id/finalize",
-        accessType: "public",
+        accessType: "admin",
         handler: payment_customer_get,
     },
     {
@@ -31,12 +31,6 @@ const routes: RouterInterface[] = [
         path: "/transaction/checkout",
         accessType: "customer",
         handler: payment_checkout_post,
-    },
-    {
-        method: "get",
-        path: "/transaction/finallize",
-        accessType: "public",
-        handler: transaction_finalize_get,
     },
 ];
 

@@ -11,7 +11,7 @@ const routes: RouterInterface[] = [
     {
         path: "/food/branch/:branch_id",
         method: "get",
-        accessType: "public",
+        accessType: "admin",
         handler: food_branch_get,
     }
 ];
