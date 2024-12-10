@@ -9,6 +9,7 @@ import { TransactionService } from 'services/OrderService';
 import { SeatService } from 'services/SeatService';
 import { TransactionCashService } from 'services/TransactionCashService';
 import { TransactionFoodDetailService } from 'services/TransactionFoodDetail';
+import { notifyClientsById } from 'webSocketConfig';
 
 interface PaymentOptions{
   orderId: string;
@@ -165,6 +166,8 @@ export const payment_cash_confirm_post = async (req: Request, res: Response) => 
     return res.status(400).json({ error: 'Transaction not found' });
 
   res.status(200).json(transactionDetails);
+
+  notifyClientsById(seat.branch_id, "New transaction created");
 }
 
 // checks if the customer has an active transaction, then returns the transaction details
