@@ -1,5 +1,4 @@
-import { branch_get_all, branch_get_by_id } from "controller/branch";
-import { transaction_finalize_get } from "controller/chef";
+import { transaction_finalize_get, chef_food_branch_get } from "controller/chef";
 import { RouterInterface } from "libraries/CustomTypes";
 
 const routes: RouterInterface[] = [
@@ -7,7 +6,7 @@ const routes: RouterInterface[] = [
         path: "/chef/transaction/branch/:branch_id",
         method: "get",
         accessType: "admin",
-        handler: branch_get_all
+        handler: chef_food_branch_get
     },
     {
         method: "get",
