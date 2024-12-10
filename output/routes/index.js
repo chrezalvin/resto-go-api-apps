@@ -8,7 +8,7 @@ const express_1 = require("express");
 const branch_1 = __importDefault(require("./branch"));
 const food_1 = __importDefault(require("./food"));
 const authenticate_1 = __importDefault(require("./authenticate"));
-const payment_1 = __importDefault(require("../middleware/payment"));
+const paymentRoutes_1 = __importDefault(require("./paymentRoutes")); // Rute pembayaran
 const checkAccessType_1 = require("../middleware/checkAccessType");
 // Asynchronous Error Handler to Catch Errors in Routes
 function asyncErrorHandler(fn) {
@@ -38,13 +38,16 @@ const routes = [
     branch_1.default, // Routes for branches
     food_1.default, // Routes for food-related services
     authenticate_1.default, // Routes for authentication
-    payment_1.default, // Payment-related routes
+    paymentRoutes_1.default, // Payment-related routes
 ];
-// Loop through routes and register each route with proper access type and error handling
+// Apply Middleware and Routes
 for (const route of routes) {
     for (const routeElement of route) {
-        router[routeElement.method](routeElement.path, (0, checkAccessType_1.checkAccessType)(routeElement.accessType), // Check if access is allowed based on accessType
-        asyncErrorHandler(routeElement.handler) // Apply async error handling
+        const handlers = Array.isArray(routeElement.handler)
+            ? routeElement.handler
+            : [routeElement.handler]; // Ensure handlers is always an array
+        router[routeElement.method](routeElement.path, (0, checkAccessType_1.checkAccessType)(routeElement.accessType), // Middleware for access control
+        ...handlers.map(asyncErrorHandler) // Apply async error handling to all handlers
         );
     }
 }

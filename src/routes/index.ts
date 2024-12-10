@@ -4,8 +4,9 @@ import { NextFunction, RequestHandler, Router, Request, Response } from "express
 import branch from "./branch";
 import food from "./food";
 import authenticate from "./authenticate";
-import payment from "../middleware/payment";
+import paymentRoutes from "./paymentRoutes"; // Rute pembayaran
 import { checkAccessType } from "middleware/checkAccessType";
+import { validatePaymentInput } from "../middleware/payment"; // Middleware pembayaran
 
 // Asynchronous Error Handler to Catch Errors in Routes
 export function asyncErrorHandler(fn: RequestHandler) {
@@ -35,16 +36,20 @@ const routes: RouterInterface[][] = [
   branch,         // Routes for branches
   food,           // Routes for food-related services
   authenticate,   // Routes for authentication
-  payment,        // Payment-related routes
+  paymentRoutes,  // Payment-related routes
 ];
 
-// Loop through routes and register each route with proper access type and error handling
+// Apply Middleware and Routes
 for (const route of routes) {
   for (const routeElement of route) {
+    const handlers = Array.isArray(routeElement.handler)
+      ? routeElement.handler
+      : [routeElement.handler]; // Ensure handlers is always an array
+
     router[routeElement.method](
       routeElement.path,
-      checkAccessType(routeElement.accessType),  // Check if access is allowed based on accessType
-      asyncErrorHandler(routeElement.handler)    // Apply async error handling
+      checkAccessType(routeElement.accessType),  // Middleware for access control
+      ...handlers.map(asyncErrorHandler)        // Apply async error handling to all handlers
     );
   }
 }

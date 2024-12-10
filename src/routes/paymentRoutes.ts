@@ -1,21 +1,14 @@
-import express, { Request, Response } from 'express';
-import { createTransaction } from '../services/Midtrans';
+import { RouterInterface } from "libraries/CustomTypes";
+import { createTransaction } from "../controller/paymentController";
+import { validatePaymentInput } from "../middleware/payment";
 
-const router = express.Router();
+const paymentRoutes: RouterInterface[] = [
+  {
+    method: "post",
+    path: "/api/payments/create",
+    accessType: "public",
+    handler: [validatePaymentInput, createTransaction], // Validasi input dan buat transaksi.
+  },
+];
 
-router.post('/create', async (req: Request, res: Response) => {
-  const { orderId, grossAmount, customerDetails } = req.body;
-
-  try {
-    const result = await createTransaction(orderId, grossAmount, customerDetails);
-    res.status(200).json(result);
-  } catch (error: any) {
-    console.error('Error creating transaction:', error.message);
-    res.status(500).json({
-      error: 'Failed to create transaction',
-      message: error.message,
-    });
-  }
-});
-
-export default router;
+export default paymentRoutes;
