@@ -27,7 +27,7 @@ export async function chef_food_branch_get(req: Request, res: Response){
         })
     );
 
-    res.status(200).json(transactions);
+    res.status(200).json(transactions.filter((transaction) => !transaction.transaction.finished)); 
 }
 
 export const transaction_finalize_get = async (req: Request, res: Response) => {
