@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createTransaction = void 0;
+exports.handleWebhook = exports.createTransaction = void 0;
 const Midtrans_1 = require("../services/Midtrans");
 const createTransaction = async (req, res) => {
     const { orderId, grossAmount, customerDetails } = req.body;
@@ -20,3 +20,16 @@ const createTransaction = async (req, res) => {
     }
 };
 exports.createTransaction = createTransaction;
+const handleWebhook = async (req, res) => {
+    try {
+        const result = await (0, Midtrans_1.handleWebhook)(req.body); // Panggil service webhook untuk menangani status pembayaran
+        res.status(200).json(result);
+    }
+    catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message || "Failed to process webhook",
+        });
+    }
+};
+exports.handleWebhook = handleWebhook;
