@@ -26,7 +26,7 @@ export async function logout_get(req: Request, res: Response){
 
     await CustomerService.deleteCustomer(customer.customer_id);
 
-    res.json({
+    res.status(200).json({
         message: "success"
     });
 }
