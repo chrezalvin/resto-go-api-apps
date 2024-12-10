@@ -10,7 +10,7 @@ const routes: RouterInterface[] = [
     },
     {
         method: "get",
-        path: "/chef/transaction/finallize",
+        path: "/chef/transaction/finallize/:transaction_id",
         accessType: "admin",
         handler: transaction_finalize_get,
     },
