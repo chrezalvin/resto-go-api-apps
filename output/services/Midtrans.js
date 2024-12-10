@@ -16,7 +16,6 @@ const midtransApi = axios_1.default.create({
         'Content-Type': 'application/json',
     },
 });
-// Fungsi untuk membuat transaksi di Midtrans dengan QRIS (mengembalikan QR code URL)
 const createTransaction = async (orderId, grossAmount, customerDetails) => {
     const payload = {
         transaction_details: {
@@ -24,18 +23,16 @@ const createTransaction = async (orderId, grossAmount, customerDetails) => {
             gross_amount: grossAmount,
         },
         customer_details: customerDetails,
-        payment_type: "qris", // Menggunakan QRIS
+        payment_type: "qris",
     };
     try {
         const response = await midtransApi.post('/charge', payload);
         console.log("Transaksi berhasil, response:", response.data);
-        // Ambil transaction_id dari respons
         const transactionId = response.data.transaction_id;
-        // Bangun URL QR code
         const qrCodeUrl = `${MIDTRANS_BASE_URL}/qris/${transactionId}/qr-code`;
         return {
-            transactionId, // Kembalikan transaction_id untuk referensi
-            qrCodeUrl, // Kembalikan URL QR code
+            transactionId,
+            qrCodeUrl,
         };
     }
     catch (error) {
@@ -44,7 +41,6 @@ const createTransaction = async (orderId, grossAmount, customerDetails) => {
     }
 };
 exports.createTransaction = createTransaction;
-// Fungsi untuk menangani notifikasi webhook dari Midtrans
 const handleWebhook = async (notification) => {
     try {
         console.log("Notifikasi webhook diterima:", notification);

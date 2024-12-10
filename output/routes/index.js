@@ -8,9 +8,9 @@ const express_1 = require("express");
 const branch_1 = __importDefault(require("./branch"));
 const food_1 = __importDefault(require("./food"));
 const authenticate_1 = __importDefault(require("./authenticate"));
-const payment_1 = __importDefault(require("../middleware/payment")); // Tambahkan impor untuk modul payment
+const payment_1 = __importDefault(require("../middleware/payment"));
 const checkAccessType_1 = require("../middleware/checkAccessType");
-// Middleware untuk menangani error secara asinkron
+// Asynchronous Error Handler to Catch Errors in Routes
 function asyncErrorHandler(fn) {
     return async (req, res, next) => {
         try {
@@ -31,19 +31,22 @@ function asyncErrorHandler(fn) {
         }
     };
 }
-// Inisialisasi Router
+// Router Initialization
 const router = (0, express_1.Router)();
-// Daftar route yang tersedia
+// Array of Routes and Route Handlers
 const routes = [
-    branch_1.default,
-    food_1.default,
-    authenticate_1.default,
-    payment_1.default, // Tambahkan modul payment ke daftar routes
+    branch_1.default, // Routes for branches
+    food_1.default, // Routes for food-related services
+    authenticate_1.default, // Routes for authentication
+    payment_1.default, // Payment-related routes
 ];
-// Iterasi untuk menambahkan semua route ke router
+// Loop through routes and register each route with proper access type and error handling
 for (const route of routes) {
     for (const routeElement of route) {
-        router[routeElement.method](routeElement.path, (0, checkAccessType_1.checkAccessType)(routeElement.accessType), asyncErrorHandler(routeElement.handler));
+        router[routeElement.method](routeElement.path, (0, checkAccessType_1.checkAccessType)(routeElement.accessType), // Check if access is allowed based on accessType
+        asyncErrorHandler(routeElement.handler) // Apply async error handling
+        );
     }
 }
+// Export the router to be used in the main application
 exports.default = router;
