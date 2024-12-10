@@ -5,6 +5,7 @@ import branch from "./branch";
 import food from "./food";
 import authenticate from "./authenticate";
 import payment from "./payment";
+import chef from "./chef";
 import { checkAccessType } from "middleware/checkAccessType";
 
 export function asyncErrorHandler(
@@ -38,6 +39,7 @@ const routes: RouterInterface[][] = [
     food,
     authenticate,
     payment,
+    chef,
 ];
 
 for(const route of routes)
