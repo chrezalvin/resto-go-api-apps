@@ -1,10 +1,12 @@
+export type TransactionPaymentMethod = "cash" | "cashless";
+
 export interface Transaction{
     transaction_id: number;
     branch_id: number;
     price: number;
     note: string | null;
     finished: boolean;
-    payment_method: "cash" | "cashless";
+    payment_method: TransactionPaymentMethod;
     eta: string;
 }
 

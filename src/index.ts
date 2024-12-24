@@ -8,9 +8,13 @@ import app from "./expressConfig";
 import "webSocketConfig";
 import { port } from "@config";
 
+import ws from "ws";
+import {createServer} from "http";
+
 // var app = require('../app');
 var debug = require('debug')('node:server');
-var http = require('http');
+const wsServer = new ws.Server({ noServer: true });
+// var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -23,7 +27,7 @@ console.log(`Server running on port ${port}`);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -67,8 +71,29 @@ function onError(error: any) {
 
 function onListening() {
   var addr = server.address();
+
+  if(addr === null || typeof addr === "string")
+    return;
+
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+wsServer.on("connection", (socket, req) => {
+  console.log("WebSocket connection established");
+
+  socket.on("message", (data) => {
+    console.log(`Received message: ${data}`);
+  });
+});
+
+/**
+ * WebSocket server in case for the upgrade event
+ */
+server.on("upgrade", (request, socket, head) => {
+  wsServer.handleUpgrade(request, socket, head, (ws) => {
+    wsServer.emit("connection", ws, request);
+  });
+});
