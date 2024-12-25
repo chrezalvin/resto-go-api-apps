@@ -43,7 +43,7 @@ export const transaction_finalize_get = async (req: Request, res: Response) => {
   
     res.status(200).json(transaction);
 
-    // websocket notifier is tread as an after effect
+    // websocket notifier is treated as an after effect
     const customerViews = await CustomerViewService.getCustomerViewByTransaction(transaction_id);
     if(customerViews.length === 0)
         return;

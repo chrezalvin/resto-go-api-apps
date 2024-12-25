@@ -5,7 +5,7 @@ import { getStorage, UploadResult, uploadBytes, deleteObject, getDownloadURL, li
 import { randomUUID } from "crypto";
 
 /**
- * @deprecated
+ * @deprecated use FileManagerSupabase instead
  */
 export class FileManagerFirebase{
     // map all FileManagers

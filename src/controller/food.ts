@@ -1,10 +1,6 @@
 import { Request, Response } from "express";
-import { Transaction } from "models";
-import { CustomerViewService } from "services/CustomerViewService";
 import { FoodService } from "services/FoodService";
-import { TransactionService } from "services/OrderService";
 import { SeatService } from "services/SeatService";
-import { TransactionFoodDetailService } from "services/TransactionFoodDetail";
 
 export async function food_get(req: Request, res: Response){
     const customer = req.customer;

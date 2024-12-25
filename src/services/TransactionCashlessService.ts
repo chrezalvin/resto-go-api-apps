@@ -10,12 +10,19 @@ export class TransactionCashlessService {
     });
 
     static async getTransactionCashlessByTransactionId(transaction_id: TransactionCashless["transaction_id"]) {
-        return await TransactionCashlessService
+        const transactionCashless = await TransactionCashlessService
             .transactionManager
             .queryBuilder(query => query
                 .select("*")
                 .eq("transaction_id", transaction_id)
+                .limit(1)
+                .single()
             );
+
+        if(Array.isArray(transactionCashless))
+            throw new Error("Transaction Cashless not found!");
+
+        return transactionCashless;
     }
 
     static async addTransactionCashless(transactionCashless: Omit<TransactionCashless, "transaction_cashless_id">) {
