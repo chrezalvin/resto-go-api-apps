@@ -5,16 +5,12 @@
  */
 
 import app from "./expressConfig";
-import "webSocketConfig";
+import { createWebsocketConfig } from "webSocketConfig";
 import { port } from "@config";
 
-import ws from "ws";
 import {createServer} from "http";
 
-// var app = require('../app');
 var debug = require('debug')('node:server');
-const wsServer = new ws.Server({ noServer: true });
-// var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -81,19 +77,4 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-wsServer.on("connection", (socket, req) => {
-  console.log("WebSocket connection established");
-
-  socket.on("message", (data) => {
-    console.log(`Received message: ${data}`);
-  });
-});
-
-/**
- * WebSocket server in case for the upgrade event
- */
-server.on("upgrade", (request, socket, head) => {
-  wsServer.handleUpgrade(request, socket, head, (ws) => {
-    wsServer.emit("connection", ws, request);
-  });
-});
+createWebsocketConfig(server);

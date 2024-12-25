@@ -1,8 +1,7 @@
 const debug = require("debug")("Server:paymentController");
 
 import { Request, Response } from 'express';
-import { Customer, Food, Transaction, TransactionPaymentMethod } from 'models';
-import { CashlessPaymentMethod } from 'models/TransactionCashless';
+import { Customer, Food } from 'models';
 import { CustomerService } from 'services/CustomerService';
 import { CustomerViewService } from 'services/CustomerViewService';
 import { FoodService } from 'services/FoodService';
@@ -12,7 +11,7 @@ import { SeatService } from 'services/SeatService';
 import { TransactionCashlessService } from 'services/TransactionCashlessService';
 import { TransactionCashService } from 'services/TransactionCashService';
 import { TransactionFoodDetailService } from 'services/TransactionFoodDetail';
-// import { notifyClientsById } from 'webSocketConfig';
+import { notifyClientsById } from 'webSocketConfig';
 
 interface PaymentOptions{
   orderId: string;
@@ -56,101 +55,6 @@ function isFoodList(value: unknown): value is FoodList{
   return true;
 }
 
-async function test(method: "cashless", option: {
-  customer_id: Customer["customer_id"],
-  paymentMethod: CashlessPaymentMethod,
-  food_list: FoodList[],
-  note?: string,
-}): Promise<Transaction>;
-
-async function test(method: "cash", option: {
-  customer_id: Customer["customer_id"],
-  food_list: FoodList[],
-  note?: string,
-}): Promise<Transaction>;
-
-async function test(method: TransactionPaymentMethod, option: {
-  customer_id: Customer["customer_id"],
-  paymentMethod?: CashlessPaymentMethod,
-  food_list: FoodList[],
-  note?: string,
-}): Promise<Transaction>{
-  // proxy
-  const transactionData = {
-    orderId: "ORDER-1733593373831",
-    grossAmount: 5000000,
-    customerDetails: {
-        name: "John Doe",
-        email: "johndoe@example.com",
-        phone: "081234567890"
-    }
-  };
-  const customerView = await CustomerViewService.getCustomerView(option.customer_id);
-  const foods = await FoodService.getFoodByIds(option.food_list.map((food) => food.food_id));
-
-  if(!customerView)
-    throw new Error('Customer not found');
-
-  if(customerView.transaction_id)
-    throw new Error('Customer already has an active transaction');
-
-  // create the transaction
-  const now = new Date();
-  const nowPlus2Hours = new Date(now.getTime() + 2 * 60 * 60 * 1000);
-  const transaction = await TransactionService.addTransaction({
-    branch_id: customerView.branch_id,
-    eta: nowPlus2Hours.toISOString(),
-    finished: false,
-    note: option.note ?? null,
-    payment_method: method,
-    price: foods.reduce((acc, food) => {
-      const foodInList = option.food_list.find((foodInList) => foodInList.food_id === food.food_id);
-      if(!foodInList)
-        return acc;
-
-      return acc + foodInList.quantity * food.price;
-    }, 0),
-  });
-
-  if(!transaction)
-    throw new Error('Failed to create transaction');
-
-  // add the transaction food list
-  await TransactionFoodDetailService
-    .createMultipleTransactionFoodDetails(option
-      .food_list
-      .map((food) => {
-        return {
-          food_id: food.food_id,
-          note: food.note ?? null,
-          transaction_id: transaction.transaction_id,
-          quantity: food.quantity,
-        }
-      })
-    );
-
-  if(method === 'cash')
-    await TransactionCashService.addTransactionCash({
-      cashier_id: 1,
-      transaction_id: transaction.transaction_id,
-    });
-  else{
-    const transactionMidtrans = await createTransaction(transactionData.orderId, transactionData.grossAmount, transactionData.customerDetails);
-
-    await TransactionCashlessService
-      .addTransactionCashless({
-        external_transaction_id: transactionMidtrans.transactionId ||  (transactionMidtrans as any).id || "abcde",
-        cashless_payment_method: option.paymentMethod!,
-        transaction_id: transaction.transaction_id,
-      });
-  }
-
-  // update the customer's transaction id
-  const customerAfterTransaction = await CustomerService.updateCustomer(option.customer_id, { transaction_id: transaction.transaction_id });
-
-  return transaction;
-}
-
 async function createTransaction2(method: "cash" | "cashless", option: {
   customer_id: Customer["customer_id"],
   food_list: FoodList[],
@@ -177,10 +81,10 @@ async function createTransaction2(method: "cash" | "cashless", option: {
 
     // create the transaction
     const now = new Date();
-    const nowPlus2Hours = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+    const nowPlus1Hours = new Date(now.getTime() + 1 * 60 * 60 * 1000);
     const transaction = await TransactionService.addTransaction({
       branch_id: customerView.branch_id,
-      eta: nowPlus2Hours.toISOString(),
+      eta: nowPlus1Hours.toISOString(),
       finished: false,
       note: option.note ?? null,
       payment_method: 'cash',
@@ -289,7 +193,7 @@ export const payment_create_post = async (req: Request, res: Response) => {
   if(!transactionDetails)
     return res.status(400).json({ error: 'Transaction not found' });
 
-  // notifyClientsById(seat.branch_id, "New transaction created");
+  notifyClientsById(seat.branch_id, "New transaction created");
 
   res.status(200).json(transactionDetails);
 }
@@ -351,7 +255,7 @@ export const payment_cash_confirm_post = async (req: Request, res: Response) => 
 
   res.status(200).json(transactionDetails);
 
-  // notifyClientsById(seat.branch_id, "New transaction created");
+  notifyClientsById(seat.branch_id, "New transaction created");
 }
 
 // checks if the customer has an active transaction, then returns the transaction details

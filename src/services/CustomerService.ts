@@ -11,7 +11,6 @@ export class CustomerService{
     });
 
     static async authenticateCustomer(seat_id: Customer["seat_id"], long: number, lat: number): Promise<Customer>{
-        // check if seat is available and user is within the branch
         const nearestBranch = await BranchService.getNearestBranch(long, lat);
         const seat = await SeatService.getSeatById(seat_id);
 
