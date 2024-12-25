@@ -87,7 +87,7 @@ async function createTransaction2(method: "cash" | "cashless", option: {
       eta: nowPlus1Hours.toISOString(),
       finished: false,
       note: option.note ?? null,
-      payment_method: 'cash',
+      payment_method: method,
       price: foods.reduce((acc, food) => {
         const foodInList = option.food_list.find((foodInList) => foodInList.food_id === food.food_id);
         if(!foodInList)
