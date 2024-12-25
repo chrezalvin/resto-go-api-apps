@@ -193,9 +193,9 @@ export const payment_create_post = async (req: Request, res: Response) => {
   if(!transactionDetails)
     return res.status(400).json({ error: 'Transaction not found' });
 
-  notifyClientsById(seat.branch_id, "New transaction created");
-
   res.status(200).json(transactionDetails);
+
+  notifyClientsById(seat.branch_id, "New transaction created");
 }
 
 export const payment_cash_confirm_post = async (req: Request, res: Response) => {
