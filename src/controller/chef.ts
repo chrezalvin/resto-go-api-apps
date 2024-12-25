@@ -3,7 +3,7 @@ import { Transaction } from "models";
 import { CustomerViewService } from "services/CustomerViewService";
 import { TransactionService } from "services/OrderService";
 import { TransactionFoodDetailService } from "services/TransactionFoodDetail";
-
+import { notifyCustomerById } from "webSocketConfig";
 
 export async function chef_food_branch_get(req: Request, res: Response){
     const branch_id = parseInt(req.params.branch_id);
@@ -42,4 +42,13 @@ export const transaction_finalize_get = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Transaction not found' });
   
     res.status(200).json(transaction);
+
+    // websocket notifier is tread as an after effect
+    const customerViews = await CustomerViewService.getCustomerViewByTransaction(transaction_id);
+    if(customerViews.length === 0)
+        return;
+    else{
+        notifyCustomerById(customerViews[0].customer_id, JSON.stringify({ message: 'Transaction finished' }));
+    }
+
   }

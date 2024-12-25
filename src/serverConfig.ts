@@ -11,7 +11,6 @@ export const MIDTRANS_BASE_URL = process.env.MIDTRANS_BASE_URL ?? "";
 export const JWT_SECRET = process.env.JWT_SECRET ?? "";
 
 export const port = process.env.PORT || 3000;
-export const websocketPort = parseInt(process.env.WEBSOCKET_PORT || "8080");
 
 if(SUPABASE_URL === "" || SUPABASE_KEY === "") {
     console.warn("Warning: Couldn't find SUPABASE DATABASE credentials in .env");

@@ -31,15 +31,17 @@ export class CustomerViewService{
         return res;
     }
 
-    static async getCustomerViewBySeat(seat_id: number){
+    static async getCustomerViewBySeat(seat_id: number): Promise<CustomerView>{
         const res = await CustomerViewService
             .branchManager
             .queryBuilder(query => query
                 .select("*")
                 .eq("seat_id", seat_id)
+                .limit(1)
+                .single()
         );
 
-        if(!Array.isArray(res))
+        if(Array.isArray(res))
             throw new Error("Failed to get customer view");
 
         return res;
