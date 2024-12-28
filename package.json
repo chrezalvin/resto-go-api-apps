@@ -6,7 +6,8 @@
   "scripts": {
     "test": "SET DEBUG=Server:*&&nodemon -r tsconfig-paths/register ./src/test.ts",
     "start": "tsc && tsc-alias &&node ./output/index",
-    "devstart": "SET DEBUG=Server:*&&nodemon -r tsconfig-paths/register ./src/index.ts"
+    "devstart": "SET DEBUG=Server:*&&nodemon -r tsconfig-paths/register ./src/index.ts",
+    "devstart:linux": "DEBUG=Server:* nodemon -r tsconfig-paths/register ./src/index.ts"
   },
   "author": "chrezalvin",
   "license": "ISC",
